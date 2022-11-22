@@ -1,13 +1,13 @@
 {
-  "name": "server",
+  "name": "TaxonomyAPI",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This is an API",
+  "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["taxonomy", "api", "animals"],
+  "author": "Fran Ríos Niño in colaboration with Daniel Recio",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

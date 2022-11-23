@@ -12,5 +12,5 @@ module.exports = (db) => {
     timestamps: true
   }
   )
-  return db.model('class', classSchema)
+  return db.model('clas', classSchema)
 }

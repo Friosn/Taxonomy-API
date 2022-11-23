@@ -15,7 +15,8 @@
   "keywords": [
     "taxonomy",
     "api",
-    "animals", "hexagonal-architecture"
+    "animals",
+    "hexagonal-architecture"
   ],
   "author": "Fran Ríos Niño in colaboration with Daniel Recio",
   "license": "ISC",

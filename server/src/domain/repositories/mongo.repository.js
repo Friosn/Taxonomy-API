@@ -9,7 +9,6 @@ const family = require('../entities/entity-family')
 const species = require('../entities/entity-species')
 const user = require('../entities/entity-user')
 
-
 dotenv.config()
 
 const db = {}

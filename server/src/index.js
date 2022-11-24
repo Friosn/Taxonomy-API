@@ -4,9 +4,12 @@ const dotenv = require('dotenv')
 
 const { connect } = require('./helper/database/connect')
 const UserRoutes = require('./api/user/user.routes')
+const ClassRoutes = require('./api/class-b/class.routes')
+const OrderRoutes = require('./api/order/order.routes')
+const FamilyRoutes = require('./api/family/family.routes')
+const SpeciesRoutes = require('./api/species/species.routes')
 const setError = require('./helper/error/handle.error')
 connect()
-
 
 const app = express()
 
@@ -29,6 +32,10 @@ app.use(express.urlencoded({ limit: '1mb', extended: true }))
 app.set('secretKey', process.env.SECRET_KEY_JWT) // we will normally delete the one assigned at the beggining and put directly this one
 // ----------Here will come the routes of the server--------
 app.use('/users', UserRoutes)
+app.use('/class', ClassRoutes)
+app.use('/order', OrderRoutes)
+app.use('/family', FamilyRoutes)
+app.use('/species', SpeciesRoutes)
 
 app.use('*', (req, res, next) => next(setError(404, 'Route Not Found')))
 // --------------------------------

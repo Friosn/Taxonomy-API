@@ -4,11 +4,9 @@ const enum_ = require('./enum')
 // We  export a function that generates an answer, reciveing arguments that will form an informative object with status and info
 
 // This will be the object that we'll recieve as answer after doing the request
-exports.ResponseService = async (status, errorCode, message, data) => {
-  return await {
-    status,
-    info: { errorCode, message, data }
-  }
+exports.ResponseService = async (status, errorCode, message, data) => await {
+  status,
+  info: { errorCode, message, data }
 }
 // Now we export different functions that will show different types of console messages
 // in different colors to know visually the different status of the log. (Success, Info, Warning & Danger TYPES)

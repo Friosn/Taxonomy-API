@@ -81,4 +81,4 @@ const deleteClass = async (req, res, next) => {
   }
 }
 
-module.exports = {getAllClasses, getOneClass, patchClass, postClass, deleteClass}
+module.exports = { getAllClasses, getOneClass, patchClass, postClass, deleteClass }

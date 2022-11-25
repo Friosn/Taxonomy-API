@@ -31,12 +31,10 @@ const getOneSpecies = async (req, res, next) => {
 
 const postSpecies = async (req, res, next) => {
   try {
-    const newSpecies = new Species()
-    newSpecies.name = req.body.name
-    newSpecies.habitat = req.body.habitat
-    newSpecies.size = req.body.size
-    newSpecies.taxonomy = req.body.taxonomy
-    newSpecies.image = req.body.image
+    const newSpecies = new Species(req.body)
+    if (req.file) {
+      newSpecies.image = req.file.path
+    }
 
     const newSpeciesToDB = await newSpecies.save()
     return res.json({

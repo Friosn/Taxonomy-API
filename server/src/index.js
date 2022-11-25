@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const dotenv = require('dotenv')
+const cookieParser = require('cookie-parser')
 
 const { connect } = require('./helper/database/connect')
 const setUpCloudinary = require('./helper/cloudinary/config.cloudinary')
@@ -33,6 +34,7 @@ app.use(
 app.use(express.json({ limit: '1mb' }))
 app.use(express.urlencoded({ limit: '1mb', extended: true }))
 app.set('secretKey', process.env.SECRET_KEY_JWT) // we will normally delete the one assigned at the beggining and put directly this one
+app.use(cookieParser())
 // ----------Here will come the routes of the server--------
 app.use('/users', UserRoutes)
 app.use('/class', ClassRoutes)

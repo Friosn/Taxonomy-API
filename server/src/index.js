@@ -3,15 +3,18 @@ const cors = require('cors')
 const dotenv = require('dotenv')
 
 const { connect } = require('./helper/database/connect')
+const setUpCloudinary = require('./helper/cloudinary/config.cloudinary')
 const UserRoutes = require('./api/user/user.routes')
 const ClassRoutes = require('./api/class-b/class.routes')
 const OrderRoutes = require('./api/order/order.routes')
 const FamilyRoutes = require('./api/family/family.routes')
 const SpeciesRoutes = require('./api/species/species.routes')
 const setError = require('./helper/error/handle.error')
-connect()
 
+dotenv.config()
 const app = express()
+connect()
+setUpCloudinary()
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, PATCH')

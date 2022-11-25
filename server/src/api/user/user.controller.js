@@ -42,14 +42,15 @@ const login = async (req, res, next) => {
         req.app.get('secretKey'),
         { expiresIn: '5h' }
       )
+      console.log(userInfo)
       return res.json({
         status: 200,
-        message: 'Welcome to your BookWishList!',
+        message: `Welcome ${userInfo.username} ${userInfo.image} to the Taxonomy API Park 🦣🦖 `,
         user: userInfo,
         token
       })
     } else {
-      return next('Password is not correct')
+      return next(setError(500, '✋🏼 Password is not correct ❌'))
     }
   } catch (error) {
     return next(setError(500, 'Login failed'))

@@ -11,6 +11,7 @@ const OrderRoutes = require('./api/order/order.routes')
 const FamilyRoutes = require('./api/family/family.routes')
 const SpeciesRoutes = require('./api/species/species.routes')
 const setError = require('./helper/error/handle.error')
+const { signedCookie } = require('cookie-parser')
 
 dotenv.config()
 const app = express()
@@ -35,10 +36,16 @@ app.use(express.json({ limit: '1mb' }))
 app.use(express.urlencoded({ limit: '1mb', extended: true }))
 app.set('secretKey', process.env.SECRET_KEY_JWT) // we will normally delete the one assigned at the beggining and put directly this one
 app.use(cookieParser())
-// ----------Here will come the routes of the server--------
 
-app.get('/', (req, res) => {
-  res.cookie()
+// ----------Here will come the routes of the server--------
+app.get('/cookie', (req, res) => {
+  res.cookie('I Cookie', 'Cookie Monster', {
+    maxAge: 10000,
+    httpOnly: true,
+    secure: true,
+    sameSite: 'lax'
+  })
+  res.send('Shooting cookies to the space 🍪🚀')
 })
 app.use('/users', UserRoutes)
 app.use('/class', ClassRoutes)

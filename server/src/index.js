@@ -36,6 +36,10 @@ app.use(express.urlencoded({ limit: '1mb', extended: true }))
 app.set('secretKey', process.env.SECRET_KEY_JWT) // we will normally delete the one assigned at the beggining and put directly this one
 app.use(cookieParser())
 // ----------Here will come the routes of the server--------
+
+app.get('/', (req, res) => {
+  res.cookie()
+})
 app.use('/users', UserRoutes)
 app.use('/class', ClassRoutes)
 app.use('/order', OrderRoutes)

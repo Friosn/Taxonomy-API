@@ -85,7 +85,41 @@ FamilyRoutes.get('/:id', getOneFamily)
  *            description: Family POSTED successfully in the API 🙌🏼!
  */
 FamilyRoutes.post('/', [isAuth], postFamily)
+/**
+ * @swagger
+ * /family/:id:
+ *      patch:
+ *        summary: UPDATE a Family to de API
+ *        tags: [Family]
+ *        requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      $ref: '#/components/shcemas/Family'
+ *        responses:
+ *          200:
+ *            description: Family UPDATED successfully in the API 🙌🏼!
+ */
 FamilyRoutes.patch('/:id', [isAuth], patchFamily)
+/**
+ * @swagger
+ * /family/:id:
+ *      delete:
+ *        summary: REMOVE ONE Family to de API
+ *        tags: [Family]
+ *        requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      $ref: '#/components/shcemas/Family'
+ *        responses:
+ *          200:
+ *            description: Family REMOVED successfully from the API 🙌🏼!
+ */
 FamilyRoutes.delete('/:id', [isAuth], deleteFamily)
 
 module.exports = FamilyRoutes

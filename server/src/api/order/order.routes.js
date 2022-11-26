@@ -44,7 +44,7 @@ const isAuth = require('../../middlewares/auth.middleware')
  * @swagger
  * /order:
  *   get:
- *     summary: Return ALL the Orders from the API
+ *     summary: GET ALL the Orders from the API
  *     tags: [Orders]
  *     requestBody:
  *       required: true
@@ -60,7 +60,7 @@ OrderRoutes.get('/', getAllOrders)
  * @swagger
  * /order/:id:
  *   get:
- *     summary: Return one Order from the API
+ *     summary: GET ONE Order from the API
  *     tags: [Orders]
  *     requestBody:
  *       required: true
@@ -76,7 +76,7 @@ OrderRoutes.get('/:id', getOneOrder)
  * @swagger
  * /order/:
  *   post:
- *     summary: Add one Order to the API
+ *     summary: ADD ONE Order to the API
  *     tags: [Orders]
  *     requestBody:
  *       required: true
@@ -94,7 +94,7 @@ OrderRoutes.post('/', [isAuth], postOrder)
  * @swagger
  * /order/:id:
  *   patch:
- *     summary: Add one Order to the API
+ *     summary: UPDATE ONE Order to the API
  *     tags: [Orders]
  *     requestBody:
  *       required: true
@@ -105,7 +105,7 @@ OrderRoutes.post('/', [isAuth], postOrder)
  *               $ref: '#/components/schemas/Order'
  *     responses:
  *       200:
- *         description: Order updated in the API 🦕!
+ *         description: Order UPDATED in the API 🦕!
  */
 OrderRoutes.patch('/:id', [isAuth], patchOrder)
 
@@ -113,7 +113,7 @@ OrderRoutes.patch('/:id', [isAuth], patchOrder)
  * @swagger
  * /order/:id:
  *   delete:
- *     summary: Add one Order to the API
+ *     summary: REMOVE ONE Order to the API
  *     tags: [Orders]
  *     requestBody:
  *       required: true
@@ -124,7 +124,7 @@ OrderRoutes.patch('/:id', [isAuth], patchOrder)
  *               $ref: '#/components/schemas/Order'
  *     responses:
  *       200:
- *         description: Order REMOVED from the API 🐾!
+ *         description: Order REMOVED successfully from the API 🐾!
  */
 OrderRoutes.delete('/:id', [isAuth], deleteOrder)
 

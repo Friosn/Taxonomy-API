@@ -43,7 +43,7 @@ const isAuth = require('../../middlewares/auth.middleware')
  * @swagger
  * /species:
  *   get:
- *     summary: Return ALL the Species from the API
+ *     summary: GET ALL the Species from the API
  *     tags: [Species]
  *     responses:
  *      200:
@@ -61,7 +61,7 @@ SpeciesRoutes.get('/', getAllSpecies)
  * @swagger
  * /species/:id:
  *   get:
- *     summary: Return one Species from the API
+ *     summary: GET ONE Species from the API
  *     tags: [Species]
  *     requestBody:
  *       required: true
@@ -77,7 +77,7 @@ SpeciesRoutes.get('/:id', getOneSpecies)
  * @swagger
  * /species/:
  *   post:
- *     summary: Creates a new Species in the document
+ *     summary: CREATE a new Species in the document
  *     tags: [Species]
  *     requestBody:
  *       required: true
@@ -96,7 +96,7 @@ SpeciesRoutes.post('/', upload.single('image'), postSpecies)
  * @swagger
  * /species/:id:
  *   patch:
- *     summary: Removes one Species from the API
+ *     summary: UPDATE ONE Species from the API
  *     tags: [Species]
  *     requestBody:
  *       required: true
@@ -115,7 +115,7 @@ SpeciesRoutes.patch('/:id', [isAuth], patchSpecies)
  * @swagger
  * /species/:id:
  *   delete:
- *     summary: Removes one Species from the API
+ *     summary: REMOVE ONE Species from the API
  *     tags: [Species]
  *     requestBody:
  *       required: true

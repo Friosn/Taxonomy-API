@@ -43,7 +43,7 @@ const isAuth = require('../../middlewares/auth.middleware')
  * @swagger
  * /species:
  *   get:
- *     summary: Return all the Species from the API
+ *     summary: Return ALL the Species from the API
  *     tags: [Species]
  *     responses:
  *      200:

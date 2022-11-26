@@ -91,6 +91,21 @@ SpeciesRoutes.get('/:id', getOneSpecies)
  *         description: New Species added to the API 🧬!
  */
 SpeciesRoutes.post('/', upload.single('image'), postSpecies)
+
+/**
+ * @swagger
+ * /species/:id:
+ *   patch:
+ *     summary: Removes one Species from the API
+ *     tags: [Species]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             $ref: '#/components/schemas/Species'
+ */
 SpeciesRoutes.patch('/:id', [isAuth], patchSpecies)
 
 /**

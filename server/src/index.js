@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const swaggerJsdoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
 const compression = require('compression')
+const path = require('path')
 
 const { connect } = require('./helper/database/connect')
 const { setUpCloudinary } = require('./helper/cloudinary/config.cloudinary')
@@ -69,24 +70,17 @@ const swaggerSpecification = {
     ]
   },
   apis: [
-    './api/species/species.routes.js'
+    `${path.join(__dirname, './api/species/species.routes.js')}`,
+    `${path.join(__dirname, './api/order/order.routes.js')}`,
+    `${path.join(__dirname, './api/family/family.routes.js')}`,
+    `${path.join(__dirname, './api/class-b/class.routes.js')}`
   ]
 }
 const specs = swaggerJsdoc(swaggerSpecification)
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(specs))
 
-/**
- * @swagger
- * /species:
- *   get:
- *     summary: return all Species
- *     tags: [bands]
- *     description: Get all species
- *     responses:
- *       200:
- *         description: Success
- *
- */
+
+
 /* SpeciesRoutes.get('/', getAllSpecies) */
 // ----------Here will come the routes of the server--------
 app.use('/users', UserRoutes)

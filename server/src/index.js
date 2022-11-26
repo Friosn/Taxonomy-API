@@ -2,8 +2,8 @@ const express = require('express')
 const cors = require('cors')
 const dotenv = require('dotenv')
 /* const cookieParser = require('cookie-parser') */
-/* const swaggerJsdoc = require('swagger-jsdoc')
-const swaggerUI = require('swagger-ui-express') */
+const swaggerJsdoc = require('swagger-jsdoc')
+const swaggerUI = require('swagger-ui-express')
 const compression = require('compression')
 
 const { connect } = require('./helper/database/connect')
@@ -53,7 +53,8 @@ app.get('/cookie', (req, res) => {
   res.send('Shooting cookies to the space 🍪🚀')
 }) */
 // ----------------------------SWAGGER ----------------------------------
-/* const swaggerSpecification = {
+
+const swaggerSpecification = {
   definition: {
     openapi: '3.0.0',
     info: {
@@ -63,17 +64,16 @@ app.get('/cookie', (req, res) => {
     },
     servers: [
       {
-        url: 'http://localhost:8080/species'
+        url: 'http://localhost:8080/'
       }
     ]
   },
   apis: [
-  `${path.join(_dirname, './api/species/species.routes.js')}`,
-  `${path.join(_dirname, './api/class-b/class.routes.js')}`
+    './api/species/species.routes.js'
   ]
 }
-const swaggerDocs = swaggerJsdoc(swaggerSpecification)
-app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocs)) */
+const specs = swaggerJsdoc(swaggerSpecification)
+app.use('/swagger', swaggerUI.serve, swaggerUI.setup(specs))
 
 /**
  * @swagger

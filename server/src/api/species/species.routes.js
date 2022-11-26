@@ -105,6 +105,9 @@ SpeciesRoutes.post('/', upload.single('image'), postSpecies)
  *           schema:
  *             type: object
  *             $ref: '#/components/schemas/Species'
+ *     responses:
+ *      200:
+ *        description: Species UPDATED in the API 🧬!
  */
 SpeciesRoutes.patch('/:id', [isAuth], patchSpecies)
 
@@ -121,6 +124,9 @@ SpeciesRoutes.patch('/:id', [isAuth], patchSpecies)
  *           schema:
  *             type: object
  *             $ref: '#/components/schemas/Species'
+ *     responses:
+ *      200:
+ *        description: Species DELETED from the API🐾!
  */
 SpeciesRoutes.delete('/:id', [isAuth], deleteSpecies)
 

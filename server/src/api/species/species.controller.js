@@ -4,7 +4,7 @@ const setError = require('../../helper/error/handle.error')
 
 const getAllSpecies = async (req, res, next) => {
   try {
-    const species = await Species.find().populate('order class species')
+    const species = await Species.find()
     res.json({
       status: 200,
       message: 'All Species recovered!',
@@ -29,18 +29,18 @@ const getOneSpecies = async (req, res, next) => {
   }
 }
 
+
 const postSpecies = async (req, res, next) => {
   try {
     const newSpecies = new Species(req.body)
     if (req.file) {
       newSpecies.image = req.file.path
     }
-
     const newSpeciesToDB = await newSpecies.save()
     return res.json({
       status: 200,
-      message: 'New biological Species successfully added!',
-      data: { newSpeciesToDB }
+      message: 'New Species successfully added 🦖',
+      newSpeciesToDB
     })
   } catch (error) {
     return next(setError(500, 'Failiure posting new Species 🍂'))

@@ -8,4 +8,4 @@ const setUpCloudinary = () => {
   })
 }
 
-module.exports = setUpCloudinary
+module.exports = { setUpCloudinary }

@@ -1,5 +1,4 @@
 const ClassRoutes = require('express').Router()
-
 const { getAllClasses, getOneClass, patchClass, postClass, deleteClass } = require('./class.controller')
 
 const isAuth = require('../../middlewares/auth.middleware')

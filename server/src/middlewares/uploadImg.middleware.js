@@ -1,11 +1,11 @@
 const multer = require('multer')
-const cloudinary = require('cloudinary')
+const cloudinary = require('cloudinary').v2
 const { CloudinaryStorage } = require('multer-storage-cloudinary')
 
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: 'Bio-Taxonomy',
+    folder: 'animalSpecies',
     allowedFormats: ['jpg', 'png', 'jpeg', 'gif']
   }
 })

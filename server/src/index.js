@@ -2,21 +2,26 @@ const express = require('express')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const cookieParser = require('cookie-parser')
+/* const swaggerJsdoc = require('swagger-jsdoc')
+const swaggerUI = require('swagger-ui-express') */
+const compression = require('compression')
 
 const { connect } = require('./helper/database/connect')
-const setUpCloudinary = require('./helper/cloudinary/config.cloudinary')
+const { setUpCloudinary } = require('./helper/cloudinary/config.cloudinary')
 const UserRoutes = require('./api/user/user.routes')
 const ClassRoutes = require('./api/class-b/class.routes')
 const OrderRoutes = require('./api/order/order.routes')
 const FamilyRoutes = require('./api/family/family.routes')
 const SpeciesRoutes = require('./api/species/species.routes')
 const setError = require('./helper/error/handle.error')
-const { signedCookie } = require('cookie-parser')
-
+/* const { signedCookie } = require('cookie-parser')
+const { getAllSpecies } = require('./api/species/species.controller')
+ */
 dotenv.config()
 const app = express()
 connect()
 setUpCloudinary()
+app.use(compression())
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, PATCH')
@@ -35,9 +40,9 @@ app.use(
 app.use(express.json({ limit: '1mb' }))
 app.use(express.urlencoded({ limit: '1mb', extended: true }))
 app.set('secretKey', process.env.SECRET_KEY_JWT) // we will normally delete the one assigned at the beggining and put directly this one
-app.use(cookieParser())
 
-// ----------Here will come the routes of the server--------
+// ---------------- COOKIES -----------------
+/* app.use(cookieParser())
 app.get('/cookie', (req, res) => {
   res.cookie('I Cookie', 'Cookie Monster', {
     maxAge: 10000,
@@ -46,7 +51,44 @@ app.get('/cookie', (req, res) => {
     sameSite: 'lax'
   })
   res.send('Shooting cookies to the space 🍪🚀')
-})
+}) */
+// ----------------------------SWAGGER ----------------------------------
+/* const swaggerSpecification = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      description: 'This is a Bio taxonomy API',
+      version: '1.0.0',
+      title: 'Taxonomy Park'
+    },
+    servers: [
+      {
+        url: 'http://localhost:8080/species'
+      }
+    ]
+  },
+  apis: [
+  `${path.join(_dirname, './api/species/species.routes.js')}`,
+  `${path.join(_dirname, './api/class-b/class.routes.js')}`
+  ]
+}
+const swaggerDocs = swaggerJsdoc(swaggerSpecification)
+app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocs)) */
+
+/**
+ * @swagger
+ * /species:
+ *   get:
+ *     summary: return all Species
+ *     tags: [bands]
+ *     description: Get all species
+ *     responses:
+ *       200:
+ *         description: Success
+ *
+ */
+/* SpeciesRoutes.get('/', getAllSpecies) */
+// ----------Here will come the routes of the server--------
 app.use('/users', UserRoutes)
 app.use('/class', ClassRoutes)
 app.use('/order', OrderRoutes)

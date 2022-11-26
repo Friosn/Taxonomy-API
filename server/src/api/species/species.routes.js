@@ -32,11 +32,11 @@ const isAuth = require('../../middlewares/auth.middleware')
  *        - taxonomy
  *        - image
  *      example:
- *        - name : Saltwater Crocodile or Crocodylus porosus
- *        - habitat : Coasts of different regions of the Pacific Ocean
- *        - size : Enormous, around 5m long, the biggest Reptile of the earth
- *        - taxonomy : Reptiliae, Crocodilia, Crocodiliae
- *        - image : https://res.cloudinary.com/dotbanq20/image/upload/v1669490873/animalSpecies/SaltwaterCrocodile_Maximo_ra5c4v.jpg
+ *         name : Saltwater Crocodile or Crocodylus porosus
+ *         habitat : Coasts of different regions of the Pacific Ocean
+ *         size : Enormous, around 5m long, the biggest Reptile of the earth
+ *         taxonomy : Reptiliae, Crocodilia, Crocodiliae
+ *         image : https://res.cloudinary.com/dotbanq20/image/upload/v1669490873/animalSpecies/SaltwaterCrocodile_Maximo_ra5c4v.jpg
  */
 
 /**
@@ -87,11 +87,26 @@ SpeciesRoutes.get('/:id', getOneSpecies)
  *             type: object
  *             $ref: '#/components/schemas/Species'
  *     responses:
- *      200:
- *        description: New Species added to the API 🧬!
+ *       200:
+ *         description: New Species added to the API 🧬!
  */
 SpeciesRoutes.post('/', upload.single('image'), postSpecies)
 SpeciesRoutes.patch('/:id', [isAuth], patchSpecies)
+
+/**
+ * @swagger
+ * /species/:id:
+ *   delete:
+ *     summary: Removes one Species from the API
+ *     tags: [Species]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             $ref: '#/components/schemas/Species'
+ */
 SpeciesRoutes.delete('/:id', [isAuth], deleteSpecies)
 
 module.exports = SpeciesRoutes

@@ -43,71 +43,52 @@ const isAuth = require('../../middlewares/auth.middleware')
  * @swagger
  * /species:
  *   get:
- *     summary: Get all species
+ *     summary: Return all the Species from the API
+ *     tags: [Species]
  *     responses:
- *       '200':
- *           description: List of species
- *     tags: [species]
- *     description: You can get a list of all Species
+ *      200:
+ *        description: All Species in the park 🦣!
+ *        content:
+ *          schema:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/Species'
+ */
+
+SpeciesRoutes.get('/', getAllSpecies)
+
+/**
+ * @swagger
+ * /species/:id:
+ *   get:
+ *     summary: Return one Species from the API
+ *     tags: [Species]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - name
- *               - habitat
- *               - size
- *               - taxonomy
- *               - image
- *             properties:
- *               name:
- *                 type: string
- *               habitat:
- *                 type: string
- *               size:
- *                 type: string
- *               taxonomy:
- *                 type: string
- *               image:
- *                 type: string
+ *             $ref: '#/components/schemas/Species'
  */
-
-SpeciesRoutes.get('/', getAllSpecies)
 SpeciesRoutes.get('/:id', getOneSpecies)
 
 /**
  * @swagger
- * /species:
+ * /species/:
  *   post:
- *     security:
- *      -bearerAuth: []
- *     tags: [species]
- *     description: You can post a new Species
+ *     summary: Creates a new Species in the document
+ *     tags: [Species]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
- *             required:
- *               - name
- *               - habitat
- *               - size
- *               - taxonomy
- *               - image
- *             properties:
- *               name:
- *                 type: string
- *               habitat:
- *                 type: string
- *               size:
- *                 type: string
- *               taxonomy:
- *                 type: string
- *               image:
- *                 type: string
+ *             $ref: '#/components/schemas/Species'
+ *     responses:
+ *      200:
+ *        description: New Species added to the API 🧬!
  */
 SpeciesRoutes.post('/', upload.single('image'), postSpecies)
 SpeciesRoutes.patch('/:id', [isAuth], patchSpecies)

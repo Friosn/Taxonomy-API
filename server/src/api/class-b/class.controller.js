@@ -35,8 +35,8 @@ const postClass = async (req, res, next) => {
     newClass.name = req.body.name
     newClass.reproduction = req.body.reproduction
     newClass.incuvation = req.body.incuvation
-    newClass.skeletonType = req.body.skeletonType
-    newClass.skinType = req.body.skinType
+    newClass.skeleton = req.body.skeletonType
+    newClass.skin = req.body.skinType
     newClass.orders = req.body.orders
 
     const newClassToDB = await newClass.save()

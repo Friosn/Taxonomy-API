@@ -5,6 +5,42 @@ const isAuth = require('../../middlewares/auth.middleware')
 
 /**
  * @swagger
+ * components:
+ *  schemas:
+ *    Species:
+ *      type: object
+ *      properties:
+ *        name:
+ *          type: string
+ *          description: Name of the Species
+ *        habitat:
+ *          type: string
+ *          description: Natural environment of the Species
+ *        size:
+ *          type: string
+ *          description: Generic dimensions of the Species
+ *        taxonomy:
+ *          type: string
+ *          description: Taxonomical order of the Species
+ *        image:
+ *          type: string
+ *          description: Uploaded image of the Species
+ *      required:
+ *        - name
+ *        - habitat
+ *        - size
+ *        - taxonomy
+ *        - image
+ *      example:
+ *        - name : Saltwater Crocodile or Crocodylus porosus
+ *        - habitat : Coasts of different regions of the Pacific Ocean
+ *        - size : Enormous, around 5m long, the biggest Reptile of the earth
+ *        - taxonomy : Reptiliae, Crocodilia, Crocodiliae
+ *        - image : https://res.cloudinary.com/dotbanq20/image/upload/v1669490873/animalSpecies/SaltwaterCrocodile_Maximo_ra5c4v.jpg
+ */
+
+/**
+ * @swagger
  * /species:
  *   get:
  *     summary: Get all species

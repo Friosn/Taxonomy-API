@@ -34,8 +34,56 @@ const isAuth = require('../../middlewares/auth.middleware')
  *        - order : Crocodilia
  *        - species : Crocodylus porosus, Osteolaemus tetraspis, Crocodylus moreletii
  */
+
+/**
+ * @swagger
+ * /family:
+ *      get:
+ *        summary: Get ALL Families from the API
+ *        tags: [Family]
+ *        requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      $ref: '#/components/shcemas/Family'
+ */
 FamilyRoutes.get('/', getAllFamilies)
+
+/**
+ * @swagger
+ * /family/:id:
+ *      get:
+ *        summary: Get one Family from the API
+ *        tags: [Family]
+ *        requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      $ref: '#/components/shcemas/Family'
+ */
 FamilyRoutes.get('/:id', getOneFamily)
+
+/**
+ * @swagger
+ * /family/:
+ *      post:
+ *        summary: ADD a Family to de API
+ *        tags: [Family]
+ *        requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      $ref: '#/components/shcemas/Family'
+ *        responses:
+ *          200:
+ *            description: Family POSTED successfully in the API 🙌🏼!
+ */
 FamilyRoutes.post('/', [isAuth], postFamily)
 FamilyRoutes.patch('/:id', [isAuth], patchFamily)
 FamilyRoutes.delete('/:id', [isAuth], deleteFamily)

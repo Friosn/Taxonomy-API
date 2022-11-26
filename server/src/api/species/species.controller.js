@@ -1,5 +1,5 @@
 const Species = require('./Species.model')
-
+const { deleteFile} = require('../../middlewares/deleteImg.middleware')
 const setError = require('../../helper/error/handle.error')
 
 const getAllSpecies = async (req, res, next) => {
@@ -28,7 +28,6 @@ const getOneSpecies = async (req, res, next) => {
     return next(setError(500, 'Failiure recovering single Species 🍂'))
   }
 }
-
 
 const postSpecies = async (req, res, next) => {
   try {
@@ -67,11 +66,18 @@ const patchSpecies = async (req, res, next) => {
 const deleteSpecies = async (req, res, next) => {
   try {
     const { id } = req.params
-    const SpeciesToDelete = await Species.findByIdAndDelete(id)
-    return res.json({
-      status: 200,
+    const speciesToDelete = await Species.findByIdAndDelete(id)
+    if(speciesToDelete.image) {
+      deleteFile(speciesToDelete.image)
+    }
+
+    if (!speciesToDelete) {
+      return next(setError(404, 'Species not found'))
+    }
+
+    return res.status(200).json({
       message: 'Species deleted successfully!',
-      data: { SpeciesToDelete }
+      speciesToDelete
     })
   } catch (error) {
     return next(setError(500, 'Failiure deleting Species 🍂'))

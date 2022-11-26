@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const dotenv = require('dotenv')
-const cookieParser = require('cookie-parser')
+/* const cookieParser = require('cookie-parser') */
 /* const swaggerJsdoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express') */
 const compression = require('compression')

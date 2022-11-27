@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const speciesSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -10,4 +11,5 @@ const speciesSchema = new mongoose.Schema({
   timestamps: true
 })
 
+speciesSchema.plugin(mongoosePaginate)
 module.exports = mongoose.model('species', speciesSchema)

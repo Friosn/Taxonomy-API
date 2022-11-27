@@ -1,10 +1,14 @@
 const Species = require('./Species.model')
-const { deleteFile} = require('../../middlewares/deleteImg.middleware')
+const { deleteFile } = require('../../middlewares/deleteImg.middleware')
 const setError = require('../../helper/error/handle.error')
 
+const options = {
+  page: 2,
+  limit: 4
+}
 const getAllSpecies = async (req, res, next) => {
   try {
-    const species = await Species.find()
+    const species = await Species.paginate({}, options)
     res.json({
       status: 200,
       message: 'All Species recovered!',
@@ -18,14 +22,28 @@ const getAllSpecies = async (req, res, next) => {
 const getOneSpecies = async (req, res, next) => {
   try {
     const { id } = req.params
-    const clase = await Species.findById(id)
+    const species = await Species.findById(id)
     res.json({
       status: 200,
       message: 'Single Species recovered successfully!',
-      data: { clase }
+      data: { species }
     })
   } catch (error) {
     return next(setError(500, 'Failiure recovering single Species 🍂'))
+  }
+}
+
+const getSpeciesByName = async (req, res, next) => {
+  try {
+    const { name } = req.params
+    const species = await Species.findOne(name)
+    res.json({
+      status: 200,
+      message: 'Species successfully recovered!',
+      data: { species }
+    })
+  } catch (error) {
+    next(setError(400, 'This Species name is not correct'))
   }
 }
 
@@ -67,7 +85,7 @@ const deleteSpecies = async (req, res, next) => {
   try {
     const { id } = req.params
     const speciesToDelete = await Species.findByIdAndDelete(id)
-    if(speciesToDelete.image) {
+    if (speciesToDelete.image) {
       deleteFile(speciesToDelete.image)
     }
 
@@ -84,4 +102,4 @@ const deleteSpecies = async (req, res, next) => {
   }
 }
 
-module.exports = { getAllSpecies, getOneSpecies, patchSpecies, postSpecies, deleteSpecies }
+module.exports = { getAllSpecies, getOneSpecies, getSpeciesByName, patchSpecies, postSpecies, deleteSpecies }

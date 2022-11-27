@@ -29,6 +29,20 @@ const getOneClass = async (req, res, next) => {
   }
 }
 
+const getClassByName = async (req, res, next) => {
+  try {
+    const { name } = req.params
+    const clase = await Class.findOne(name)
+    res.json({
+      status: 200,
+      message: 'Class successfully recovered!',
+      data: { clase }
+    })
+  } catch (error) {
+    next(setError(400, 'This taxonomical Class name is not correct'))
+  }
+}
+
 const postClass = async (req, res, next) => {
   try {
     const newClass = new Class()
@@ -81,4 +95,4 @@ const deleteClass = async (req, res, next) => {
   }
 }
 
-module.exports = { getAllClasses, getOneClass, patchClass, postClass, deleteClass }
+module.exports = { getAllClasses, getOneClass, getClassByName, patchClass, postClass, deleteClass }

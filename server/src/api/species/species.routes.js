@@ -1,5 +1,5 @@
 const SpeciesRoutes = require('express').Router()
-const { getAllSpecies, getOneSpecies, patchSpecies, postSpecies, deleteSpecies } = require('./species.controller')
+const { getAllSpecies, getOneSpecies, getSpeciesByName,patchSpecies, postSpecies, deleteSpecies } = require('./species.controller')
 const upload = require('../../middlewares/uploadImg.middleware')
 const isAuth = require('../../middlewares/auth.middleware')
 
@@ -73,6 +73,22 @@ SpeciesRoutes.get('/', getAllSpecies)
  */
 SpeciesRoutes.get('/:id', getOneSpecies)
 
+/**
+ * @swagger
+ * /species/name/{name}:
+ *   get:
+ *     summary: GET ONE Species BY NAME
+ *     tags: [Species]
+ *     parameters:
+ *          -in: path
+ *           name: name
+ *     description: Get a species by name
+ *     responses:
+ *         200:
+ *          description: You got the name right!
+ * 
+ */
+SpeciesRoutes.get('/name/:name', getSpeciesByName)
 /**
  * @swagger
  * /species/:

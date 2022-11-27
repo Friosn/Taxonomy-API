@@ -89,21 +89,19 @@ const patchSpecies = async (req, res, next) => {
 const deleteSpecies = async (req, res, next) => {
   try {
     const { id } = req.params
-    const speciesToDelete = await Species.findByIdAndDelete(id)
-    if (speciesToDelete.image) {
-      deleteFile(speciesToDelete.image)
+    const deletedSpecies = await Species.findByIdAndDelete(id)
+    if (deletedSpecies.image) {
+      deleteFile(deletedSpecies.image)
     }
-
-    if (!speciesToDelete) {
+    if (!deletedSpecies) {
       return next(setError(404, 'Species not found'))
     }
-
     return res.status(200).json({
-      message: 'Species deleted successfully!',
-      speciesToDelete
+      message: 'Species deleted',
+      deletedSpecies
     })
   } catch (error) {
-    return next(setError(500, 'Failiure deleting Species 🍂'))
+    return next(setError(500, error.message | 'Delete failed'))
   }
 }
 

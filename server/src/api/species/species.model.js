@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 
 const speciesSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   habitat: { type: String, required: true },
   size: { type: String, required: true },
   taxonomy: { type: String, required: true },

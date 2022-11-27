@@ -77,6 +77,8 @@ const swaggerSpecification = {
 }
 const specs = swaggerJsdoc(swaggerSpecification)
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(specs))
+
+
 // -----------------------------------------------------------
 
 // ----------Here will come the routes of the server--------

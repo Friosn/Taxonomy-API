@@ -86,6 +86,31 @@ const patchSpecies = async (req, res, next) => {
   }
 }
 
+const patchSpeciesByName = async (req, res, next) => {
+  try {
+    const { name } = req.params
+
+    const speciesUpdate = new Species(req.body)
+
+    speciesUpdate.name = name
+    const speciesToPatch = await Species.findOneAndUpdate(name, speciesUpdate)
+
+    if (req.file) {
+      deleteFile(speciesToPatch.image)
+      speciesUpdate.image = req.file.path
+    }
+    if (!speciesToPatch) {
+      return next('Species not found in data base')
+    }
+    res.status(200).json({
+      new: speciesUpdate,
+      old: speciesToPatch
+    })
+  } catch (error) {
+    return next(setError(500, error.message | 'Failiure updating Species 🍂'))
+  }
+}
+
 const deleteSpecies = async (req, res, next) => {
   try {
     const { id } = req.params
@@ -105,4 +130,4 @@ const deleteSpecies = async (req, res, next) => {
   }
 }
 
-module.exports = { getAllSpecies, getOneSpecies, getSpeciesByName, patchSpecies, postSpecies, deleteSpecies }
+module.exports = { getAllSpecies, getOneSpecies, getSpeciesByName, patchSpecies, patchSpeciesByName, postSpecies, deleteSpecies }

@@ -31,18 +31,12 @@ const getOneOrder = async (req, res, next) => {
 
 const postOrder = async (req, res, next) => {
   try {
-    const newOrder = new Order()
-    newOrder.name = req.body.name
-    newOrder.feeding = req.body.feeding
-    newOrder.class = req.body.class
-    newOrder.incisors = req.body.incisors
-    newOrder.families = req.body.families
-
+    const newOrder = new Order(req.body)
     const newOrderToDB = await newOrder.save()
     return res.json({
       status: 200,
-      message: 'New biological Order successfully added!',
-      data: { newOrderToDB }
+      message: 'New Order successfully added 🦖',
+      newOrderToDB
     })
   } catch (error) {
     return next(setError(500, 'Failiure posting new Order 🍂'))

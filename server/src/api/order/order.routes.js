@@ -33,11 +33,11 @@ const isAuth = require('../../middlewares/auth.middleware')
  *        - class
  *        - families
  *      example:
- *        - name : Crocodilia
- *        - feeding : Carnivore
- *        - incisors : Acrodontial, Pleurodontial and Thecodontial
- *        - class : Reptilia
- *        - families : Alligators, Caimaninae
+ *        name : Crocodilia
+ *        feeding : Carnivore
+ *        incisors : Acrodontial, Pleurodontial and Thecodontial
+ *        class : Reptilia
+ *        families : Alligators, Caimaninae
  */
 
 /**
@@ -89,7 +89,7 @@ OrderRoutes.get('/:id', getOneOrder)
  *       200:
  *         description: New Order added 🦖!
  */
-OrderRoutes.post('/', [isAuth], postOrder)
+OrderRoutes.post('/', postOrder)
 /**
  * @swagger
  * /order/:id:

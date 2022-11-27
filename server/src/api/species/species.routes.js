@@ -1,7 +1,7 @@
 const SpeciesRoutes = require('express').Router()
-const { getAllSpecies, getOneSpecies, getSpeciesByName, patchSpecies, postSpecies, deleteSpecies } = require('./species.controller')
+const { getAllSpecies, getOneSpecies, getSpeciesByName, patchSpecies, patchSpeciesByName,postSpecies, deleteSpecies } = require('./species.controller')
 const upload = require('../../middlewares/uploadImg.middleware')
-const isAuth = require('../../middlewares/auth.middleware')
+/* const isAuth = require('../../middlewares/auth.middleware') */
 
 /**
  * @swagger
@@ -39,6 +39,7 @@ const isAuth = require('../../middlewares/auth.middleware')
  *         image : https://res.cloudinary.com/dotbanq20/image/upload/v1669490873/animalSpecies/SaltwaterCrocodile_Maximo_ra5c4v.jpg
  */
 
+// GET ALL----------
 /**
  * @swagger
  * /species:
@@ -57,6 +58,7 @@ const isAuth = require('../../middlewares/auth.middleware')
 
 SpeciesRoutes.get('/', getAllSpecies)
 
+// GET BY ID -----------------------
 /**
  * @swagger
  * /species/{id}:
@@ -84,6 +86,7 @@ SpeciesRoutes.get('/', getAllSpecies)
  */
 SpeciesRoutes.get('/:id', getOneSpecies)
 
+// GET BY NAME --------------------------
 /**
  * @swagger
  * /species/name/{name}:
@@ -111,6 +114,7 @@ SpeciesRoutes.get('/:id', getOneSpecies)
  */
 SpeciesRoutes.get('/name/:name', getSpeciesByName)
 
+// POST--------------------
 /**
  * @swagger
  * /species/:
@@ -130,6 +134,7 @@ SpeciesRoutes.get('/name/:name', getSpeciesByName)
  */
 SpeciesRoutes.post('/', upload.single('image'), postSpecies)
 
+// UPDATE by ID-----------------
 /**
  * @swagger
  * /species/{id}:
@@ -139,10 +144,6 @@ SpeciesRoutes.post('/', upload.single('image'), postSpecies)
  *      parameters:
  *        - in: path
  *          name: id
- *          schema:
- *            type: string
- *          required: true
- *          description: The species ID
  *      requestBody:
  *        required: true
  *        content:
@@ -159,6 +160,34 @@ SpeciesRoutes.post('/', upload.single('image'), postSpecies)
  */
 SpeciesRoutes.patch('/:id', upload.single('image'), patchSpecies)
 
+// UPDATE by NAME----------------
+
+/**
+ * @swagger
+ * /species/name/{name}:
+ *    patch:
+ *      summary: UPDATE Species BY NAME
+ *      tags: [Species]
+ *      parameters:
+ *        - in: path
+ *          name: name
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              $ref: '#/components/schemas/Species'
+ *      responses:
+ *         200:
+ *           description: Species successfully updated
+ *         400:
+ *           description: Species not found
+ *
+ */
+
+SpeciesRoutes.patch('/name/:name', upload.single('image'), patchSpeciesByName)
+// DELETE ------------------
 /**
  * @swagger
  * /species/{id}:

@@ -39,7 +39,7 @@ const isAuth = require('../../middlewares/auth.middleware')
  * @swagger
  * /family:
  *      get:
- *        summary: GET ALL Families 
+ *        summary: GET ALL Families
  *        tags: [Family]
  *        requestBody:
  *          required: true
@@ -55,7 +55,7 @@ FamilyRoutes.get('/', getAllFamilies)
  * @swagger
  * /family/:id:
  *      get:
- *        summary: GET ONE Family 
+ *        summary: GET ONE Family
  *        tags: [Family]
  *        requestBody:
  *          required: true

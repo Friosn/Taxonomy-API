@@ -30,9 +30,9 @@ const getOneClass = async (req, res, next) => {
 }
 
 const getClassByName = async (req, res, next) => {
+  const { name } = req.params
   try {
-    const { name } = req.params
-    const clase = await Class.findOne(name)
+    const clase = await Class.find({ name })
     res.json({
       status: 200,
       message: 'Class successfully recovered!',
@@ -65,8 +65,8 @@ const postClass = async (req, res, next) => {
 }
 
 const patchClass = async (req, res, next) => {
+  const { id } = req.params
   try {
-    const { id } = req.params
     const classToPatch = new Class(req.body)
     classToPatch._id = id
     const updateClass = await Class.findByIdAndUpdate(id, classToPatch)

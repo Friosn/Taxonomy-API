@@ -105,7 +105,7 @@ SpeciesRoutes.get('/:id', getOneSpecies)
  *               schema:
  *                   type: object
  *                   $ref: '#/components/schemas/Species'
- *         400:
+ *         404:
  *           description: Species not found
  *
  */
@@ -115,7 +115,7 @@ SpeciesRoutes.get('/name/:name', getSpeciesByName)
  * @swagger
  * /species/:
  *   post:
- *     summary: CREATE a new Species in the document
+ *     summary: CREATE a new Species
  *     tags: [Species]
  *     requestBody:
  *       required: true
@@ -132,40 +132,53 @@ SpeciesRoutes.post('/', upload.single('image'), postSpecies)
 
 /**
  * @swagger
- * /species/:id:
- *   patch:
- *     summary: UPDATE ONE Species from the API
- *     tags: [Species]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             $ref: '#/components/schemas/Species'
- *     responses:
- *      200:
- *        description: Species UPDATED in the API 🧬!
+ * /species/{id}:
+ *    patch:
+ *      summary: UPDATE Species BY ID
+ *      tags: [Species]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: The species ID
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              $ref: '#/components/schemas/Species'
+ *      responses:
+ *         200:
+ *           description: Species successfully updated
+ *         400:
+ *           description: Species not found
+ *
  */
-SpeciesRoutes.patch('/:id', [isAuth], patchSpecies)
+SpeciesRoutes.patch('/:id', upload.single('image'), patchSpecies)
 
 /**
  * @swagger
- * /species/:id:
- *   delete:
- *     summary: REMOVE ONE Species from the API
- *     tags: [Species]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             $ref: '#/components/schemas/Species'
- *     responses:
- *      200:
- *        description: Species DELETED from the API🐾!
+ * /species/{id}:
+ *    delete:
+ *      summary: DELETE Species BY ID
+ *      tags: [Species]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: The species ID
+ *      responses:
+ *         200:
+ *           description: Species deleted ❎
+ *         400:
+ *           description: Species not found
+ *
  */
-SpeciesRoutes.delete('/:id', [isAuth], deleteSpecies)
+SpeciesRoutes.delete('/:id', deleteSpecies)
 
 module.exports = SpeciesRoutes

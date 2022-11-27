@@ -64,17 +64,25 @@ const postSpecies = async (req, res, next) => {
 const patchSpecies = async (req, res, next) => {
   try {
     const { id } = req.params
-    const speciesToPatch = new Species(req.body)
-    speciesToPatch._id = id
-    const updateSpecies = await Species.findByIdAndUpdate(id, speciesToPatch)
-    res.json({
-      status: 200,
-      message: 'Update made successfully!',
-      data: { updateSpecies }
 
+    const speciesUpdate = new Species(req.body)
+
+    speciesUpdate._id = id
+    const speciesToPatch = await Species.findByIdAndUpdate(id, speciesUpdate)
+
+    if (req.file) {
+      deleteFile(speciesToPatch.image)
+      speciesUpdate.image = req.file.path
+    }
+    if (!speciesToPatch) {
+      return next('Species not found in data base')
+    }
+    res.status(200).json({
+      new: speciesUpdate,
+      old: speciesToPatch
     })
   } catch (error) {
-    return next(setError(500, 'Failiure updating Species 🍂'))
+    return next(setError(500, error.message | 'Failiure updating Species 🍂'))
   }
 }
 

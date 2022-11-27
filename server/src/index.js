@@ -16,7 +16,6 @@ const FamilyRoutes = require('./api/family/family.routes')
 const SpeciesRoutes = require('./api/species/species.routes')
 const setError = require('./helper/error/handle.error')
 /* const { signedCookie } = require('cookie-parser')
-const { getAllSpecies } = require('./api/species/species.controller')
  */
 dotenv.config()
 const app = express()
@@ -78,10 +77,8 @@ const swaggerSpecification = {
 }
 const specs = swaggerJsdoc(swaggerSpecification)
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(specs))
+// -----------------------------------------------------------
 
-
-
-/* SpeciesRoutes.get('/', getAllSpecies) */
 // ----------Here will come the routes of the server--------
 app.use('/users', UserRoutes)
 app.use('/class', ClassRoutes)

@@ -1,5 +1,5 @@
 const SpeciesRoutes = require('express').Router()
-const { getAllSpecies, getOneSpecies, getSpeciesByName,patchSpecies, postSpecies, deleteSpecies } = require('./species.controller')
+const { getAllSpecies, getOneSpecies, getSpeciesByName, patchSpecies, postSpecies, deleteSpecies } = require('./species.controller')
 const upload = require('../../middlewares/uploadImg.middleware')
 const isAuth = require('../../middlewares/auth.middleware')
 
@@ -43,7 +43,7 @@ const isAuth = require('../../middlewares/auth.middleware')
  * @swagger
  * /species:
  *   get:
- *     summary: GET ALL the Species from the API
+ *     summary: GET ALL the Species
  *     tags: [Species]
  *     responses:
  *      200:
@@ -59,36 +59,58 @@ SpeciesRoutes.get('/', getAllSpecies)
 
 /**
  * @swagger
- * /species/:id:
- *   get:
- *     summary: GET ONE Species from the API
- *     tags: [Species]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             $ref: '#/components/schemas/Species'
+ * /species/{id}:
+ *    get:
+ *      summary: GET ONE Species BY ID
+ *      tags: [Species]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: The species ID
+ *      responses:
+ *         200:
+ *           description: You got the ID right!
+ *           content:
+ *             application/json:
+ *               schema:
+ *                   type: object
+ *                   $ref: '#/components/schemas/Species'
+ *         400:
+ *           description: Species not found
+ *
  */
 SpeciesRoutes.get('/:id', getOneSpecies)
 
 /**
  * @swagger
  * /species/name/{name}:
- *   get:
- *     summary: GET ONE Species BY NAME
- *     tags: [Species]
- *     parameters:
- *          -in: path
- *           name: name
- *     description: Get a species by name
- *     responses:
+ *    get:
+ *      summary: GET ONE Species BY NAME
+ *      tags: [Species]
+ *      parameters:
+ *        - in: path
+ *          name: name
+ *          schema:
+ *            type: string
+ *          required: true
+ *          description: The species NAME
+ *      responses:
  *         200:
- *          description: You got the name right!
- * 
+ *           description: You got the name right!
+ *           content:
+ *             application/json:
+ *               schema:
+ *                   type: object
+ *                   $ref: '#/components/schemas/Species'
+ *         400:
+ *           description: Species not found
+ *
  */
 SpeciesRoutes.get('/name/:name', getSpeciesByName)
+
 /**
  * @swagger
  * /species/:

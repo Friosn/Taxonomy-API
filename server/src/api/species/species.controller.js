@@ -2,13 +2,10 @@ const Species = require('./Species.model')
 const { deleteFile } = require('../../middlewares/deleteImg.middleware')
 const setError = require('../../helper/error/handle.error')
 
-const options = {
-  page: 2,
-  limit: 4
-}
 const getAllSpecies = async (req, res, next) => {
   try {
-    const species = await Species.paginate({}, options)
+    const { page = 1, limit = 10 } = req.query
+    const species = await Species.find().limit(limit * 1).skip((page - 1) * limit)
     res.json({
       status: 200,
       message: 'All Species recovered!',
@@ -34,13 +31,13 @@ const getOneSpecies = async (req, res, next) => {
 }
 
 const getSpeciesByName = async (req, res, next) => {
+  const { name } = req.params
   try {
-    const { name } = req.params
-    const species = await Species.findOne(name)
+    const speciesName = await Species.find({ name })
     res.json({
       status: 200,
-      message: 'Species successfully recovered!',
-      data: { species }
+      message: 'Species successfully recovered 🧸!',
+      data: { speciesName }
     })
   } catch (error) {
     next(setError(400, 'This Species name is not correct'))

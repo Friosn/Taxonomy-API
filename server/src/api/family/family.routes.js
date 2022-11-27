@@ -39,7 +39,7 @@ const isAuth = require('../../middlewares/auth.middleware')
  * @swagger
  * /family:
  *      get:
- *        summary: GET ALL Families from the API
+ *        summary: GET ALL Families 
  *        tags: [Family]
  *        requestBody:
  *          required: true
@@ -55,7 +55,7 @@ FamilyRoutes.get('/', getAllFamilies)
  * @swagger
  * /family/:id:
  *      get:
- *        summary: GET ONE Family from the API
+ *        summary: GET ONE Family 
  *        tags: [Family]
  *        requestBody:
  *          required: true
@@ -71,7 +71,7 @@ FamilyRoutes.get('/:id', getOneFamily)
  * @swagger
  * /family/:
  *      post:
- *        summary: ADD ONE Family to de API
+ *        summary: ADD ONE Family
  *        tags: [Family]
  *        requestBody:
  *          required: true
@@ -89,7 +89,7 @@ FamilyRoutes.post('/', [isAuth], postFamily)
  * @swagger
  * /family/:id:
  *      patch:
- *        summary: UPDATE ONE Family to de API
+ *        summary: UPDATE ONE Family
  *        tags: [Family]
  *        requestBody:
  *          required: true
@@ -107,7 +107,7 @@ FamilyRoutes.patch('/:id', [isAuth], patchFamily)
  * @swagger
  * /family/:id:
  *      delete:
- *        summary: REMOVE ONE Family to de API
+ *        summary: REMOVE ONE Family
  *        tags: [Family]
  *        requestBody:
  *          required: true
@@ -118,7 +118,7 @@ FamilyRoutes.patch('/:id', [isAuth], patchFamily)
  *                      $ref: '#/components/shcemas/Family'
  *        responses:
  *          200:
- *            description: Family REMOVED successfully from the API 🙌🏼!
+ *            description: Family REMOVED successfully  🙌🏼!
  */
 FamilyRoutes.delete('/:id', [isAuth], deleteFamily)
 

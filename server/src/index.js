@@ -23,6 +23,17 @@ connect()
 setUpCloudinary()
 app.use(compression())
 
+const shouldCompress = (req, res) => {
+  if (req.headers['x-no-compression']) {
+    return false
+  }
+  return compression.filter(req, res)
+}
+app.use(compression({
+  filter: shouldCompress,
+  threshold: 0
+}))
+
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, PATCH')
   res.header('Access-Control-Allow-Credentials', true)

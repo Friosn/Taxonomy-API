@@ -80,11 +80,6 @@ FamilyRoutes.get('/:id', getOneFamily)
  *                  schema:
  *                      type: object
  *                      $ref: '#/components/shcemas/Family'
- *          example:
- *                  name : Crocodylidae
- *                  class : Reptilia / Lizards
- *                  order : Crocodilia
- *                  species : Crocodylus porosus, Osteolaemus tetraspis, Crocodylus moreletii
  *        responses:
  *          200:
  *            description: Family POSTED successfully in the API 🙌🏼!

@@ -36,8 +36,6 @@ const isAuth = require('../../middlewares/auth.middleware')
  *        name : Crocodilia
  *        feeding : Carnivore
  *        incisors : Acrodontial, Pleurodontial and Thecodontial
- *        class : Reptilia
- *        families : Alligators, Caimaninae
  */
 
 /**
@@ -89,25 +87,36 @@ OrderRoutes.get('/:id', getOneOrder)
  *       200:
  *         description: New Order added 🦖!
  */
+
 OrderRoutes.post('/', postOrder)
+
 /**
  * @swagger
- * /order/:id:
- *   patch:
- *     summary: UPDATE ONE Order
- *     tags: [Orders]
- *     requestBody:
- *       required: true
- *       content:
+ * /order/{id}:
+ *    patch:
+ *      summary: UPDATE Order BY ID
+ *      tags: [Orders]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *              type: string
+ *          required: true
+ *      requestBody:
+ *        required: true
+ *        content:
  *          application/json:
- *             schema:
- *               type: object
- *               $ref: '#/components/schemas/Order'
- *     responses:
- *       200:
- *         description: Order UPDATED in the API 🦕!
+ *            schema:
+ *              type: object
+ *              $ref: '#/components/schemas/Order'
+ *      responses:
+ *         200:
+ *           description: Order successfully updated
+ *         400:
+ *           description: Order not found
+ *
  */
-OrderRoutes.patch('/:id', [isAuth], patchOrder)
+OrderRoutes.patch('/:id', patchOrder)
 
 /**
  * @swagger
@@ -115,6 +124,12 @@ OrderRoutes.patch('/:id', [isAuth], patchOrder)
  *   delete:
  *     summary: REMOVE ONE Order
  *     tags: [Orders]
+ *     parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *              type: string
+ *          required: true
  *     requestBody:
  *       required: true
  *       content:

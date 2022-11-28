@@ -4,7 +4,7 @@ const setError = require('../../helper/error/handle.error')
 
 const getAllOrders = async (req, res, next) => {
   try {
-    const orders = await Order.find().populate('order class species')
+    const orders = await Order.find()
     res.json({
       status: 200,
       message: 'All Orders recovered!',
@@ -32,11 +32,17 @@ const getOneOrder = async (req, res, next) => {
 const postOrder = async (req, res, next) => {
   try {
     const newOrder = new Order(req.body)
-    const newOrderToDB = await newOrder.save()
+    newOrder.name = req.body.name
+    newOrder.feeding = req.body.feeding
+    newOrder.incisors = req.body.incisors
+    newOrder.families = req.body.families
+    console.log(newOrder)
+    const orderBD = await newOrder.save()
+    console.log(orderBD)
     return res.json({
       status: 200,
       message: 'New Order successfully added 🦖',
-      newOrderToDB
+      orderBD
     })
   } catch (error) {
     return next(setError(500, 'Failiure posting new Order 🍂'))

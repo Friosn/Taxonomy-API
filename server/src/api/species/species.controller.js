@@ -4,7 +4,7 @@ const setError = require('../../helper/error/handle.error')
 
 const getAllSpecies = async (req, res, next) => {
   try {
-    const { page = 1, limit = 10 } = req.query
+    const { page = 1, limit = 4 } = req.query
     const species = await Species.find().limit(limit * 1).skip((page - 1) * limit)
     res.json({
       status: 200,

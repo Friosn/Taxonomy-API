@@ -4,7 +4,7 @@ const setError = require('../../helper/error/handle.error')
 
 const getAllFamilies = async (req, res, next) => {
   try {
-    const families = await Family.find().populate('order class species')
+    const families = await Family.find().populate('species')
     res.json({
       status: 200,
       message: 'All families recovered!',

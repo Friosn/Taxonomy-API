@@ -52,17 +52,6 @@ app.use(express.json({ limit: '1mb' }))
 app.use(express.urlencoded({ limit: '1mb', extended: true }))
 app.set('secretKey', process.env.SECRET_KEY_JWT) // we will normally delete the one assigned at the beggining and put directly this one
 
-// ---------------- COOKIES -----------------
-/* app.use(cookieParser())
-app.get('/cookie', (req, res) => {
-  res.cookie('I Cookie', 'Cookie Monster', {
-    maxAge: 10000,
-    httpOnly: true,
-    secure: true,
-    sameSite: 'lax'
-  })
-  res.send('Shooting cookies to the space 🍪🚀')
-}) */
 // ----------------------------SWAGGER ----------------------------------
 
 const swaggerSpecification = {
@@ -89,7 +78,6 @@ const swaggerSpecification = {
 const specs = swaggerJsdoc(swaggerSpecification)
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(specs))
 
-
 // -----------------------------------------------------------
 
 // ----------Here will come the routes of the server--------
@@ -108,9 +96,8 @@ app.use((error, req, res, next) => {
     .json(error.message || 'Unexpected error 🤢')
 })
 
-app.disable('x-powered-by') // Like that anybody will be able to know with which lenguage was this app made
+app.disable('x-powered-by')
 
-// Now we connect to the server
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port : http://localhost:${process.env.PORT}`) // this PORT would also be directly substituted by process.env.PORT for more anonymity
 })

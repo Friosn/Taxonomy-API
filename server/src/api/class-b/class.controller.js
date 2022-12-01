@@ -52,7 +52,6 @@ const postClass = async (req, res, next) => {
     newClass.skeleton = req.body.skeletonType
     newClass.skin = req.body.skinType
     newClass.orders = req.body.orders
-
     const newClassToDB = await newClass.save()
     return res.json({
       status: 200,

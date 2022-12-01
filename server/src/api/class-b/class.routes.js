@@ -52,7 +52,7 @@ const isAuth = require('../../middlewares/auth.middleware')
  *          schema:
  *            type: array
  *            items:
- *              $ref: '#/components/schemas/Species'
+ *              $ref: '#/components/schemas/Class'
  */
 ClassRoutes.get('/', getAllClasses)
 
